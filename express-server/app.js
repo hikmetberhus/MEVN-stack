@@ -8,6 +8,7 @@ const app = express();
 
 /* Routes */
 const authRouter = require('./routes/auth');
+const usersRouter = require('./routes/users');
 
 /* Mongodb connections */
 const db = require('./helper/db')();
@@ -25,9 +26,10 @@ app.use(cors());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: true}));
 
+app.use('/api/users', admin_guard);
 
 app.use('/auth', authRouter);
-
+app.use('/api', adminsRouter);
 
 // catch 404 and forward to error handler
 app.use((req, res, next) => {
