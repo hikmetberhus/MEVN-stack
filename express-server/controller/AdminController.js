@@ -22,12 +22,6 @@ exports.index = (req, res) =>{
 exports.show = (req, res) => {
     let user_id = req.params.id
 
-    if (!user_id)
-    {
-        res.status(400).send({message: 'Bad request. Id is the required parameter!'})
-        return
-    }
-
     User.findById(user_id)
         .then((user) => {
             if (!user)
@@ -45,12 +39,6 @@ exports.show = (req, res) => {
 
 exports.create = (req, res) => {
     let {email, name, surname, password} = req.body
-
-    if(!email || !name || !surname || !password)
-    {
-        res.status(400).send({ message: 'Content can not be empty!'})
-        return
-    }
 
     bcrypt.hash(password, 10)
         .then((hash) => {
@@ -78,18 +66,6 @@ exports.update = (req, res) => {
     let user_id = req.params.id
     let {email, name, surname, password} = req.body
 
-    if (!user_id)
-    {
-        res.status(400).send({message: 'Bad request. Id is the required parameter!'})
-        return
-    }
-
-    if(!email || !name || !surname || !password)
-    {
-        res.status(400).send({ message: 'Content can not be empty!'})
-        return
-    }
-
     bcrypt.hash(password, 10).then((hash) => {
         User.findByIdAndUpdate(user_id, {
             email,
@@ -113,12 +89,6 @@ exports.update = (req, res) => {
 
 exports.destroy = (req, res) => {
     let user_id = req.params.id
-
-    if (!user_id)
-    {
-        res.status(400).send({message: 'Bad request. Id is the required parameter!'})
-        return
-    }
 
     User.findByIdAndRemove(user_id)
         .then(() => {
