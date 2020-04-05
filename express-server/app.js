@@ -27,8 +27,8 @@ app.use(cors());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: true}));
 
-app.use('/api/users', admin_guard);
 app.use('/api/admins', admin_guard);
+app.use('/api/users', admin_guard);
 
 app.use('/auth', authRouter);
 app.use('/api', adminsRouter);
