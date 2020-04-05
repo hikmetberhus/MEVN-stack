@@ -7,12 +7,6 @@ const User = require('../models/Users')
 exports.register = (req, res) => {
     let {email, name, surname, password} = req.body
 
-    if(!email || !name || !surname || !password)
-    {
-        res.status(400).send({ message: 'Content can not be empty!'})
-        return
-    }
-
     bcrypt.hash(password, 10)
         .then((hash) => {
             let user = new User({
@@ -36,12 +30,6 @@ exports.register = (req, res) => {
 
 exports.login = (req, res) => {
     let {email, password} = req.body
-
-    if (!email || !password)
-    {
-        res.status(400).send({ message: 'Email or Password cannot be empty!'})
-        return
-    }
 
     User.findOne({ email }, (err, user) => {
         if (err)
