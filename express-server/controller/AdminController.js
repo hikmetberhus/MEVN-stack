@@ -9,6 +9,7 @@ exports.index = (req, res) =>{
             if (!users)
             {
                 res.status(204).send({message: 'Users not found!' })
+                return
             }
 
             res.status(200).send({ users })
@@ -20,6 +21,12 @@ exports.index = (req, res) =>{
 
 exports.show = (req, res) => {
     let user_id = req.params.id
+
+    if (!user_id)
+    {
+        res.status(400).send({message: 'Bad request. Id is the required parameter!'})
+        return
+    }
 
     User.findById(user_id)
         .then((user) => {
