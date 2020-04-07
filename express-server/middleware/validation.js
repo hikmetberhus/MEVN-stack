@@ -1,4 +1,4 @@
-const applyRules = require('../helper/validate')
+const {validator, applyRules} = require('../helper/validate')
 
 const rules = {
     register: {

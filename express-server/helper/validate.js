@@ -19,4 +19,7 @@ const applyRules = (req, res, next, rules, customMessage) => {
     })
 }
 
-module.exports = applyRules
+module.exports = {
+    validator,
+    applyRules
+}
