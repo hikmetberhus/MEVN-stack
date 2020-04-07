@@ -30,6 +30,7 @@ app.use(bodyParser.urlencoded({extended: true}));
 
 app.use('/api/admins', guards.admin);
 app.use('/api/users', guards.admin);
+app.use('/api/questions', guards.user);
 
 app.use('/auth', authRouter);
 app.use('/api', adminsRouter);

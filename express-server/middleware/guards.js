@@ -2,7 +2,7 @@ const jwt = require('jsonwebtoken')
 
 const User = require('../models/Users')
 
-const admin = (req, res, next) => {
+const guardProcess = (req, res, next, permission) => {
     let token = req.headers['x-access-token'] || req.body.token || req.query.token
 
     if (token)
@@ -16,7 +16,7 @@ const admin = (req, res, next) => {
 
             User.findById(decoded._id)
                 .then((data) => {
-                    if (data.permission === 'admin')
+                    if (data.permission === permission)
                     {
                         req.decode = decoded
                         next()
@@ -36,6 +36,15 @@ const admin = (req, res, next) => {
     }
 }
 
+const admin = (req, res, next) => {
+    guardProcess(req, res, next, 'admin')
+}
+
+const user = (req, res, next) => {
+    guardProcess(req, res, next, 'user')
+}
+
 module.exports = {
-    admin
+    admin,
+    user
 }
