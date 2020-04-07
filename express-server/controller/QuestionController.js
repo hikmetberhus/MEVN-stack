@@ -79,7 +79,7 @@ exports.isRight = (req, res) => {
         .then((question) => {
             question = question[0]
 
-            if (question.right_option === answer){
+            if (question.right_option === answer.toUpperCase()){
                 Score.findOneAndUpdate(
                     {
                         user_id: mongoose.Types.ObjectId(user_id)
