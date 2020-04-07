@@ -16,7 +16,7 @@ const questionsRouter = require('./routes/questions');
 const db = require('./helper/db')();
 
 /* Middleware */
-const admin_guard = require('./middleware/admin_guard')
+const guards = require('./middleware/guards')
 
 /* require config file with JWT */
 const config = require('./config');
@@ -28,8 +28,8 @@ app.use(cors());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: true}));
 
-app.use('/api/admins', admin_guard);
-app.use('/api/users', admin_guard);
+app.use('/api/admins', guards.admin);
+app.use('/api/users', guards.admin);
 
 app.use('/auth', authRouter);
 app.use('/api', adminsRouter);

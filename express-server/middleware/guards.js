@@ -2,7 +2,7 @@ const jwt = require('jsonwebtoken')
 
 const User = require('../models/Users')
 
-module.exports = (req, res, next) => {
+const admin = (req, res, next) => {
     let token = req.headers['x-access-token'] || req.body.token || req.query.token
 
     if (token)
@@ -34,4 +34,8 @@ module.exports = (req, res, next) => {
             message: 'Unauthorized | No token provided!'
         })
     }
+}
+
+module.exports = {
+    admin
 }
